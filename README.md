@@ -7,7 +7,7 @@
 
 环境准备
 本地环境需要您安装 node 和 git。
-我们的技术栈基于 Typescript、Angular、g2、@delon 和 ng-zorro-antd，提前了解和学习这些知识会非常有帮助。
+技术栈基于 Typescript、Angular、g2、@delon 和 ng-zorro-antd
 
 备注：
 默认用户名：admin
