@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.Frame.AbpCore.Core", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.Frame.AbpCore.Application", "src\YY.Frame.AbpCore.Application\YY.Frame.AbpCore.Application.csproj", "{3870C648-4AEA-4B85-BA3F-F2F63B96136A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.Frame.AbpCore.Tests", "test\LTMCompanyNameFree.YoyoCmsTemplate.Tests\YY.Frame.AbpCore.Tests.csproj", "{0D4C5D00-C144-4213-A007-4B8944113AB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.Frame.AbpCore.Tests", "test\YY.Frame.AbpCore.Tests\YY.Frame.AbpCore.Tests.csproj", "{0D4C5D00-C144-4213-A007-4B8944113AB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.Frame.AbpCore.Migrator", "src\YY.Frame.AbpCore.Migrator\YY.Frame.AbpCore.Migrator.csproj", "{880B3591-E057-46FE-B525-10BD83828B93}"
 EndProject

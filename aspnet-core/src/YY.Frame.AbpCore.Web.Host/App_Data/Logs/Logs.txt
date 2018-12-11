@@ -4935,3 +4935,65 @@ INFO  2018-12-10 17:30:44,569 [38   ] ore.Mvc.Internal.ControllerActionInvoker -
 INFO  2018-12-10 17:30:44,631 [4    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
 INFO  2018-12-10 17:30:44,637 [4    ] ore.Mvc.Internal.ControllerActionInvoker - Executed action YY.Frame.Application.Authorization.Permissions.PermissionAppService.GetAllPermissionsTree (YY.Frame.AbpCore.Application) in 121.8786ms
 INFO  2018-12-10 17:30:44,643 [4    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 169.1345ms 200 application/json; charset=utf-8
+DEBUG 2018-12-11 11:10:18,797 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-12-11 11:10:19,785 [1    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2018-12-11 11:10:19,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: YY.Frame.AbpCore.Web.Host.Startup.YoyoCmsTemplateWebHostModule, YY.Frame.AbpCore.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,856 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: YY.Frame.AbpCore.YoyoCmsTemplateWebCoreModule, YY.Frame.AbpCore.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,857 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: YY.Frame.AbpCore.YoyoCmsTemplateApplicationModule, YY.Frame.AbpCore.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,859 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: YY.Frame.AbpCore.YoyoCmsTemplateCoreModule, YY.Frame.AbpCore.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,859 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,860 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,863 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,864 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,867 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: YY.Frame.AbpCore.EntityFrameworkCore.YoyoCmsTemplateEntityFrameworkModule, YY.Frame.AbpCore.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,868 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,868 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,869 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,871 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,871 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,872 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=4.0.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:19,880 [1    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2018-12-11 11:10:20,139 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-12-11 11:10:20,139 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-12-11 11:10:20,139 [1    ] o.Configuration.LanguageManagementConfig - Converted YoyoCmsTemplate (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-12-11 11:10:20,139 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-12-11 11:10:21,650 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: YY.Frame.AbpCore.EntityFrameworkCore.YoyoCmsTemplateDbContext, YY.Frame.AbpCore.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-12-11 11:10:26,642 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-12-11 11:10:26,828 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-12-11 11:10:26,968 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-12-11 11:10:27,122 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: YoyoCmsTemplate
+DEBUG 2018-12-11 11:10:27,281 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-12-11 11:10:28,557 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-12-11 11:10:28,737 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 10 classes define auto mapping attributes
+DEBUG 2018-12-11 11:10:28,737 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Models.TokenAuth.ExternalLoginProviderInfoModel
+DEBUG 2018-12-11 11:10:28,759 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Users.Dto.CreateUserDto
+DEBUG 2018-12-11 11:10:28,761 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Users.Dto.UserDto
+DEBUG 2018-12-11 11:10:28,763 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-12-11 11:10:28,763 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-12-11 11:10:28,764 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Roles.Dto.CreateRoleDto
+DEBUG 2018-12-11 11:10:28,764 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Roles.Dto.PermissionDto
+DEBUG 2018-12-11 11:10:28,764 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.Roles.Dto.RoleDto
+DEBUG 2018-12-11 11:10:28,768 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-12-11 11:10:28,769 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - YY.Frame.AbpCore.MultiTenancy.Dto.TenantDto
+INFO  2018-12-11 11:10:39,764 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-12-11 11:10:39,764 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-12-11 11:10:40,033 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 299.746ms 200 
+INFO  2018-12-11 11:10:47,507 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing action YY.Frame.AbpCore.Web.Host.Controllers.HomeController.Index (YY.Frame.AbpCore.Web.Host)
+INFO  2018-12-11 11:10:49,581 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Executing action method YY.Frame.AbpCore.Web.Host.Controllers.HomeController.Index (YY.Frame.AbpCore.Web.Host) - Validation state: Valid
+INFO  2018-12-11 11:10:49,601 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Executed action method YY.Frame.AbpCore.Web.Host.Controllers.HomeController.Index (YY.Frame.AbpCore.Web.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 4.3142ms.
+INFO  2018-12-11 11:10:50,189 [13   ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2018-12-11 11:10:50,214 [13   ] ore.Mvc.Internal.ControllerActionInvoker - Executed action YY.Frame.AbpCore.Web.Host.Controllers.HomeController.Index (YY.Frame.AbpCore.Web.Host) in 2695.8599ms
+INFO  2018-12-11 11:10:50,258 [13   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 10528.8014ms 302 
+INFO  2018-12-11 11:10:50,274 [13   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html  
+INFO  2018-12-11 11:10:50,341 [13   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 67.6942ms 200 text/html
+INFO  2018-12-11 11:10:50,425 [13   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css  
+INFO  2018-12-11 11:10:50,453 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js  
+INFO  2018-12-11 11:10:50,482 [7    ] NetCore.StaticFiles.StaticFileMiddleware - The file /swagger-ui-bundle.js was not modified
+INFO  2018-12-11 11:10:50,485 [13   ] NetCore.StaticFiles.StaticFileMiddleware - The file /swagger-ui.css was not modified
+INFO  2018-12-11 11:10:50,504 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 41.4435ms 304 application/javascript
+INFO  2018-12-11 11:10:50,505 [13   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 69.5046ms 304 text/css
+INFO  2018-12-11 11:10:51,092 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js  
+INFO  2018-12-11 11:10:51,098 [7    ] NetCore.StaticFiles.StaticFileMiddleware - The file /swagger-ui-standalone-preset.js was not modified
+INFO  2018-12-11 11:10:51,104 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 10.4045ms 304 application/javascript
+INFO  2018-12-11 11:10:52,143 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json  
+INFO  2018-12-11 11:10:52,851 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 693.2834ms 200 application/json;charset=utf-8
