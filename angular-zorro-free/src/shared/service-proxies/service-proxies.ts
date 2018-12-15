@@ -141,6 +141,449 @@ export class AccountServiceProxy {
 }
 
 @Injectable()
+export class AuditLogServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param userName (optional) 
+     * @param serviceName (optional) 
+     * @param methodName (optional) 
+     * @param browserInfo (optional) 
+     * @param hasException (optional) 
+     * @param minExecutionDuration (optional) 
+     * @param maxExecutionDuration (optional) 
+     * @param sorting (optional) 
+     * @param maxResultCount (optional) 
+     * @param skipCount (optional) 
+     * @return Success
+     */
+    getAuditLogs(startDate: moment.Moment | null | undefined, endDate: moment.Moment | null | undefined, userName: string | null | undefined, serviceName: string | null | undefined, methodName: string | null | undefined, browserInfo: string | null | undefined, hasException: boolean | null | undefined, minExecutionDuration: number | null | undefined, maxExecutionDuration: number | null | undefined, sorting: string | null | undefined, maxResultCount: number | null | undefined, skipCount: number | null | undefined): Observable<PagedResultDtoOfAuditLogListDto> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogs?";
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&"; 
+        if (userName !== undefined)
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+        if (serviceName !== undefined)
+            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&"; 
+        if (methodName !== undefined)
+            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&"; 
+        if (browserInfo !== undefined)
+            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&"; 
+        if (hasException !== undefined)
+            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&"; 
+        if (minExecutionDuration !== undefined)
+            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&"; 
+        if (maxExecutionDuration !== undefined)
+            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAuditLogs(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAuditLogs(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfAuditLogListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfAuditLogListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAuditLogs(response: HttpResponseBase): Observable<PagedResultDtoOfAuditLogListDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfAuditLogListDto.fromJS(resultData200) : new PagedResultDtoOfAuditLogListDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfAuditLogListDto>(<any>null);
+    }
+
+    /**
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param userName (optional) 
+     * @param serviceName (optional) 
+     * @param methodName (optional) 
+     * @param browserInfo (optional) 
+     * @param hasException (optional) 
+     * @param minExecutionDuration (optional) 
+     * @param maxExecutionDuration (optional) 
+     * @param sorting (optional) 
+     * @param maxResultCount (optional) 
+     * @param skipCount (optional) 
+     * @return Success
+     */
+    getAuditLogsToExcel(startDate: moment.Moment | null | undefined, endDate: moment.Moment | null | undefined, userName: string | null | undefined, serviceName: string | null | undefined, methodName: string | null | undefined, browserInfo: string | null | undefined, hasException: boolean | null | undefined, minExecutionDuration: number | null | undefined, maxExecutionDuration: number | null | undefined, sorting: string | null | undefined, maxResultCount: number | null | undefined, skipCount: number | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogsToExcel?";
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&"; 
+        if (userName !== undefined)
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+        if (serviceName !== undefined)
+            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&"; 
+        if (methodName !== undefined)
+            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&"; 
+        if (browserInfo !== undefined)
+            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&"; 
+        if (hasException !== undefined)
+            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&"; 
+        if (minExecutionDuration !== undefined)
+            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&"; 
+        if (maxExecutionDuration !== undefined)
+            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAuditLogsToExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAuditLogsToExcel(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAuditLogsToExcel(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FileDto.fromJS(resultData200) : new FileDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getEntityHistoryObjectTypes(): Observable<NameValueDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityHistoryObjectTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEntityHistoryObjectTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEntityHistoryObjectTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<NameValueDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<NameValueDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEntityHistoryObjectTypes(response: HttpResponseBase): Observable<NameValueDto[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(NameValueDto.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NameValueDto[]>(<any>null);
+    }
+
+    /**
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param userName (optional) 
+     * @param entityTypeFullName (optional) 
+     * @param sorting (optional) 
+     * @param maxResultCount (optional) 
+     * @param skipCount (optional) 
+     * @return Success
+     */
+    getEntityChanges(startDate: moment.Moment | null | undefined, endDate: moment.Moment | null | undefined, userName: string | null | undefined, entityTypeFullName: string | null | undefined, sorting: string | null | undefined, maxResultCount: number | null | undefined, skipCount: number | null | undefined): Observable<PagedResultDtoOfEntityChangeListDto> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityChanges?";
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&"; 
+        if (userName !== undefined)
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+        if (entityTypeFullName !== undefined)
+            url_ += "EntityTypeFullName=" + encodeURIComponent("" + entityTypeFullName) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEntityChanges(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEntityChanges(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfEntityChangeListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfEntityChangeListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEntityChanges(response: HttpResponseBase): Observable<PagedResultDtoOfEntityChangeListDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfEntityChangeListDto.fromJS(resultData200) : new PagedResultDtoOfEntityChangeListDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfEntityChangeListDto>(<any>null);
+    }
+
+    /**
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param userName (optional) 
+     * @param entityTypeFullName (optional) 
+     * @param sorting (optional) 
+     * @param maxResultCount (optional) 
+     * @param skipCount (optional) 
+     * @return Success
+     */
+    getEntityChangesToExcel(startDate: moment.Moment | null | undefined, endDate: moment.Moment | null | undefined, userName: string | null | undefined, entityTypeFullName: string | null | undefined, sorting: string | null | undefined, maxResultCount: number | null | undefined, skipCount: number | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityChangesToExcel?";
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&"; 
+        if (userName !== undefined)
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+        if (entityTypeFullName !== undefined)
+            url_ += "EntityTypeFullName=" + encodeURIComponent("" + entityTypeFullName) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEntityChangesToExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEntityChangesToExcel(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEntityChangesToExcel(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FileDto.fromJS(resultData200) : new FileDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+
+    /**
+     * @param entityChangeId (optional) 
+     * @return Success
+     */
+    getEntityPropertyChanges(entityChangeId: number | null | undefined): Observable<EntityPropertyChangeDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityPropertyChanges?";
+        if (entityChangeId !== undefined)
+            url_ += "entityChangeId=" + encodeURIComponent("" + entityChangeId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEntityPropertyChanges(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEntityPropertyChanges(<any>response_);
+                } catch (e) {
+                    return <Observable<EntityPropertyChangeDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<EntityPropertyChangeDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEntityPropertyChanges(response: HttpResponseBase): Observable<EntityPropertyChangeDto[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(EntityPropertyChangeDto.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<EntityPropertyChangeDto[]>(<any>null);
+    }
+}
+
+@Injectable()
 export class BookServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -2177,6 +2620,451 @@ export interface IRegisterOutput {
     canLogin: boolean | undefined;
 }
 
+export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLogListDto {
+    totalCount: number | undefined;
+    items: AuditLogListDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfAuditLogListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.totalCount = data["totalCount"];
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(AuditLogListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfAuditLogListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfAuditLogListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): PagedResultDtoOfAuditLogListDto {
+        const json = this.toJSON();
+        let result = new PagedResultDtoOfAuditLogListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPagedResultDtoOfAuditLogListDto {
+    totalCount: number | undefined;
+    items: AuditLogListDto[] | undefined;
+}
+
+export class AuditLogListDto implements IAuditLogListDto {
+    userId: number | undefined;
+    userName: string | undefined;
+    impersonatorTenantId: number | undefined;
+    impersonatorUserId: number | undefined;
+    serviceName: string | undefined;
+    methodName: string | undefined;
+    parameters: string | undefined;
+    executionTime: moment.Moment | undefined;
+    executionDuration: number | undefined;
+    clientIpAddress: string | undefined;
+    clientName: string | undefined;
+    browserInfo: string | undefined;
+    exception: string | undefined;
+    customData: string | undefined;
+    id: number | undefined;
+
+    constructor(data?: IAuditLogListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.userId = data["userId"];
+            this.userName = data["userName"];
+            this.impersonatorTenantId = data["impersonatorTenantId"];
+            this.impersonatorUserId = data["impersonatorUserId"];
+            this.serviceName = data["serviceName"];
+            this.methodName = data["methodName"];
+            this.parameters = data["parameters"];
+            this.executionTime = data["executionTime"] ? moment(data["executionTime"].toString()) : <any>undefined;
+            this.executionDuration = data["executionDuration"];
+            this.clientIpAddress = data["clientIpAddress"];
+            this.clientName = data["clientName"];
+            this.browserInfo = data["browserInfo"];
+            this.exception = data["exception"];
+            this.customData = data["customData"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): AuditLogListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AuditLogListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["userName"] = this.userName;
+        data["impersonatorTenantId"] = this.impersonatorTenantId;
+        data["impersonatorUserId"] = this.impersonatorUserId;
+        data["serviceName"] = this.serviceName;
+        data["methodName"] = this.methodName;
+        data["parameters"] = this.parameters;
+        data["executionTime"] = this.executionTime ? this.executionTime.toISOString() : <any>undefined;
+        data["executionDuration"] = this.executionDuration;
+        data["clientIpAddress"] = this.clientIpAddress;
+        data["clientName"] = this.clientName;
+        data["browserInfo"] = this.browserInfo;
+        data["exception"] = this.exception;
+        data["customData"] = this.customData;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): AuditLogListDto {
+        const json = this.toJSON();
+        let result = new AuditLogListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAuditLogListDto {
+    userId: number | undefined;
+    userName: string | undefined;
+    impersonatorTenantId: number | undefined;
+    impersonatorUserId: number | undefined;
+    serviceName: string | undefined;
+    methodName: string | undefined;
+    parameters: string | undefined;
+    executionTime: moment.Moment | undefined;
+    executionDuration: number | undefined;
+    clientIpAddress: string | undefined;
+    clientName: string | undefined;
+    browserInfo: string | undefined;
+    exception: string | undefined;
+    customData: string | undefined;
+    id: number | undefined;
+}
+
+export class FileDto implements IFileDto {
+    fileName: string;
+    fileType: string;
+    fileToken: string;
+
+    constructor(data?: IFileDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.fileName = data["fileName"];
+            this.fileType = data["fileType"];
+            this.fileToken = data["fileToken"];
+        }
+    }
+
+    static fromJS(data: any): FileDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FileDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fileName"] = this.fileName;
+        data["fileType"] = this.fileType;
+        data["fileToken"] = this.fileToken;
+        return data; 
+    }
+
+    clone(): FileDto {
+        const json = this.toJSON();
+        let result = new FileDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFileDto {
+    fileName: string;
+    fileType: string;
+    fileToken: string;
+}
+
+export class NameValueDto implements INameValueDto {
+    name: string | undefined;
+    value: string | undefined;
+
+    constructor(data?: INameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.value = data["value"];
+        }
+    }
+
+    static fromJS(data: any): NameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data; 
+    }
+
+    clone(): NameValueDto {
+        const json = this.toJSON();
+        let result = new NameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface INameValueDto {
+    name: string | undefined;
+    value: string | undefined;
+}
+
+export class PagedResultDtoOfEntityChangeListDto implements IPagedResultDtoOfEntityChangeListDto {
+    totalCount: number | undefined;
+    items: EntityChangeListDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfEntityChangeListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.totalCount = data["totalCount"];
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(EntityChangeListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfEntityChangeListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfEntityChangeListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): PagedResultDtoOfEntityChangeListDto {
+        const json = this.toJSON();
+        let result = new PagedResultDtoOfEntityChangeListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPagedResultDtoOfEntityChangeListDto {
+    totalCount: number | undefined;
+    items: EntityChangeListDto[] | undefined;
+}
+
+export class EntityChangeListDto implements IEntityChangeListDto {
+    userId: number | undefined;
+    userName: string | undefined;
+    changeTime: moment.Moment | undefined;
+    entityTypeFullName: string | undefined;
+    changeType: EntityChangeListDtoChangeType | undefined;
+    changeTypeName: string | undefined;
+    entityChangeSetId: number | undefined;
+    id: number | undefined;
+
+    constructor(data?: IEntityChangeListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.userId = data["userId"];
+            this.userName = data["userName"];
+            this.changeTime = data["changeTime"] ? moment(data["changeTime"].toString()) : <any>undefined;
+            this.entityTypeFullName = data["entityTypeFullName"];
+            this.changeType = data["changeType"];
+            this.changeTypeName = data["changeTypeName"];
+            this.entityChangeSetId = data["entityChangeSetId"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): EntityChangeListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EntityChangeListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["userName"] = this.userName;
+        data["changeTime"] = this.changeTime ? this.changeTime.toISOString() : <any>undefined;
+        data["entityTypeFullName"] = this.entityTypeFullName;
+        data["changeType"] = this.changeType;
+        data["changeTypeName"] = this.changeTypeName;
+        data["entityChangeSetId"] = this.entityChangeSetId;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): EntityChangeListDto {
+        const json = this.toJSON();
+        let result = new EntityChangeListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEntityChangeListDto {
+    userId: number | undefined;
+    userName: string | undefined;
+    changeTime: moment.Moment | undefined;
+    entityTypeFullName: string | undefined;
+    changeType: EntityChangeListDtoChangeType | undefined;
+    changeTypeName: string | undefined;
+    entityChangeSetId: number | undefined;
+    id: number | undefined;
+}
+
+export class EntityPropertyChangeDto implements IEntityPropertyChangeDto {
+    entityChangeId: number | undefined;
+    newValue: string | undefined;
+    originalValue: string | undefined;
+    propertyName: string | undefined;
+    propertyTypeFullName: string | undefined;
+    tenantId: number | undefined;
+    id: number | undefined;
+
+    constructor(data?: IEntityPropertyChangeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.entityChangeId = data["entityChangeId"];
+            this.newValue = data["newValue"];
+            this.originalValue = data["originalValue"];
+            this.propertyName = data["propertyName"];
+            this.propertyTypeFullName = data["propertyTypeFullName"];
+            this.tenantId = data["tenantId"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): EntityPropertyChangeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EntityPropertyChangeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["entityChangeId"] = this.entityChangeId;
+        data["newValue"] = this.newValue;
+        data["originalValue"] = this.originalValue;
+        data["propertyName"] = this.propertyName;
+        data["propertyTypeFullName"] = this.propertyTypeFullName;
+        data["tenantId"] = this.tenantId;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): EntityPropertyChangeDto {
+        const json = this.toJSON();
+        let result = new EntityPropertyChangeDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEntityPropertyChangeDto {
+    entityChangeId: number | undefined;
+    newValue: string | undefined;
+    originalValue: string | undefined;
+    propertyName: string | undefined;
+    propertyTypeFullName: string | undefined;
+    tenantId: number | undefined;
+    id: number | undefined;
+}
+
 export class PagedResultDtoOfBookListDto implements IPagedResultDtoOfBookListDto {
     totalCount: number | undefined;
     items: BookListDto[] | undefined;
@@ -3874,6 +4762,12 @@ export enum IsTenantAvailableOutputState {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 
+}
+
+export enum EntityChangeListDtoChangeType {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }
 
 export class SwaggerException extends Error {

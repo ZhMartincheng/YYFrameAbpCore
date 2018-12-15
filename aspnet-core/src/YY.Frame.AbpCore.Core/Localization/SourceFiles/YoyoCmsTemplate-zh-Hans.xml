@@ -235,5 +235,7 @@
     <text name="ClickHere" value="点击这里" />
     <text name="Apply" value="应用" />
     <text name="CustomRange" value="自定义范围" />
+    
+     <text name="AuditLog" value="日志审计" />
   </texts>
 </localizationDictionary>

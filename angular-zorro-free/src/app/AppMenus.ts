@@ -28,13 +28,13 @@ export class AppMenus {
             link: "/app/roles",
 
         },
-        {
-            text: "Book",
-            i18n: "Book",
-            acl: "Pages.Book",
-            icon: { type: "icon", value: "user" },
-            link: "/app/book",
-        },
+        // {
+        //     text: "Book",
+        //     i18n: "Book",
+        //     acl: "Pages.Book",
+        //     icon: { type: "icon", value: "user" },
+        //     link: "/app/book",
+        // },
 
         {
             text: "",
@@ -42,6 +42,13 @@ export class AppMenus {
             acl: "Pages.Users",
             icon: { type: "icon", value: "user" },
             link: "/app/users",
+        },
+        {
+            text: "",
+            i18n: "AuditLog",
+            acl: "Pages.AuditLogs",
+            icon: { type: "icon", value: "user" },
+            link: "/app/audit",
         },
         {
             text: "",

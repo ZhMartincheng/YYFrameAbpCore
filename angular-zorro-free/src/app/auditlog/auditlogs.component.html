@@ -1,0 +1,201 @@
+<page-header [title]="l('AuditLog')"></page-header>
+
+
+<nz-card [nzExtra]="extraTpl">
+
+    <ng-template #extraTpl>
+        <button nz-button (click)="refresh()" nzShape="circle">
+            <i class="anticon anticon-reload"></i>
+        </button>
+        <!-- <button nz-button (click)="exportAudit()" nzShape="circle" nzType="primary" [nzLoading]="exportSLoading">
+            <i class="fa fa-file-excel-o"></i>
+            <span>导出</span>
+        </button> -->
+        <button nz-button class="btn btn-success" (click)="exportAudit()" [nzLoading]="exportSLoading"><i class="fa fa-file-excel-o"></i>
+            {{l("ExportToExcel")}}
+        </button>
+
+
+        <!--<button type="button" class="btn btn-success" (click)="exportToExcelAuditLogs()"><i class="fa fa-file-excel-o"></i> {{l("ExportToExcel")}}</button>
+        <button type="button" class="btn btn-metal" (click)="getAuditLogs()"><i class="fa fa-refresh"></i> {{l("Refresh")}}</button> -->
+    </ng-template>
+    <div>
+        <form class="horizontal-form" #auditFilterForm="ngForm" (ngSubmit)="getAuditLogs()">
+            <div nz-row [nzGutter]="24">
+                <div nz-col [nzSpan]="12" class="mb-md">
+                    <label for="StartEndRange" class="control-label">{{l("DateRange")}}</label>
+                    <div class="form-group">
+                        <nz-range-picker name="timeRangePicker" [nzFormat]="shedateFormat" [ngModel]="searchAreasDate"
+                            (ngModelChange)="changeTime($event)"></nz-range-picker>
+
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="12" class="mb-md">
+                    <label for="UsernameAuditLog" class="control-label">{{l("UserName")}}</label>
+                    <div class="form-group">
+                        <input id="UsernameAuditLog" type="text" name="UsernameAuditLog" class="form-control"
+                            [(ngModel)]="usernameAuditLog">
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="advancedFiltersAreShown">
+                <div nz-row [nzGutter]="24">
+                    <div nz-col [nzSpan]="12" class="mb-md">
+                        <label for="ServiceName" class="control-label">{{l("Service")}}</label>
+
+                        <div class="form-group">
+                            <input id="ServiceName" name="ServiceName" type="text" class="form-control" [(ngModel)]="serviceName">
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="12" class="mb-md">
+                        <label class="control-label" style="display: block">{{l("Duration")}}</label>
+                        <div class="input-group">
+                            <input type="text" name="MinExecutionDuration" only-number="" class="form-control" min="0"
+                                max="86400000" ng-minlength="0" ng-maxlength="8" [(ngModel)]="minExecutionDuration">
+                            <span class="input-group-addon">
+                                ---
+                            </span>
+                            <input type="text" name="MaxExecutionDuration" only-number="" class="form-control" min="0"
+                                max="86400000" ng-minlength="0" ng-maxlength="8" [(ngModel)]="maxExecutionDuration">
+                        </div>
+                    </div>
+                </div>
+                <div nz-row [nzGutter]="24">
+                    <div nz-col [nzSpan]="12" class="mb-md">
+                        <label for="MethodName" class="control-label">{{l("Action")}}</label>
+
+                        <div class="form-group">
+                            <input id="MethodName" type="text" name="MethodName" class="form-control" [(ngModel)]="methodName">
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="12" class="mb-md">
+                        <label for="HasException" class="control-label">{{l("ErrorState")}}</label>
+
+                        <div class="form-group">
+                            <select id="HasException" name="HasException" class="form-control" [(ngModel)]="hasException">
+                                <option value="">{{l("All")}}</option>
+                                <option value="false">{{l("Success")}}</option>
+                                <option value="true">{{l("HasError")}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div nz-row [nzGutter]="24">
+                    <div nz-col [nzSpan]="8" class="mb-md">
+                        <label for="BrowserInfo" class="control-label">{{l("Browser")}}</label>
+
+                        <div class="form-group">
+                            <input id="BrowserInfo" type="text" name="BrowserInfo" class="form-control" [(ngModel)]="browserInfo">
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="8" class="mb-md">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div nz-row [nzGutter]="24">
+                <div nz-col [nzSpan]="8" class="mb-md">
+                    <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                            class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                    <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                            class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <nz-table #ajaxTable nzShowSizeChanger [nzData]="dataList" [nzTotal]="totalItems" [(nzPageIndex)]="pageNumber"
+        [(nzPageSize)]="pageSize" [nzLoading]="isTableLoading" (nzPageIndexChange)="refresh()" (nzPageSizeChange)="refresh()"
+        [nzFrontPagination]="false">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>
+                    {{l('Time')}}
+                </th>
+                <th>
+                    {{l('UserName')}}
+                </th>
+                <th>
+                    {{l('Service')}}
+                </th>
+                <th>
+                    {{l('Action')}}
+                </th>
+                <th>
+                    {{l('Duration')}}
+                </th>
+                <th>
+                    {{l('IpAddress')}}
+                </th>
+                <th>
+                    {{l('Client')}}
+                </th>
+                <th>
+                    {{l('Browser')}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of ajaxTable.data">
+                <td style="width: 75px">
+                    <div class="text-center">
+                        <!-- <button class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" (click)="showAuditLogDetails(item)"><i
+                                class="la la-search" [attr.aria-label]="l('Search')"></i></button> -->
+                        <a (click)="showAuditLogDetails(item)">详细</a>
+                    </div>
+                </td>
+                <td style="width: 75px">
+                    <div class="text-center">
+                        <i *ngIf="item.exception" class="fa fa-warning m--font-warning"></i>
+                        <i *ngIf="!item.exception" class="fa fa-check-circle m--font-success"></i>
+                    </div>
+                </td>
+                <td>
+                    {{ item.executionTime | momentFormat:'YYYY-MM-DD HH:mm:ss'}}
+                </td>
+                <td>
+                    {{item.userName}}</td>
+                <td>
+                    {{item.serviceName}}</td>
+                <td>
+                    <!-- <span class="ui-column-title">{{l('Action')}}</span> -->
+                    {{item.methodName}}
+                </td>
+
+                <td>
+                    <!-- <span class="ui-column-title">{{l('Duration')}}</span> -->
+                    {{l('Xms', item.executionDuration)}}
+                </td>
+
+                <td>
+                    <!-- <span class="ui-column-title">{{l('IpAddress')}}</span> -->
+                    {{item.clientIpAddress}}
+                </td>
+
+                <td>
+                    <!-- <span class="ui-column-title">{{l('Client')}}</span> -->
+                    {{item.clientName}}
+                </td>
+                <td>
+                    <!-- <span class="ui-column-title">{{l('Browser')}}</span> -->
+                    <span title="{{item.browserInfo}}">{{truncateStringWithPostfix(item.browserInfo, 20)}}</span>
+                </td>
+                <!-- <td>
+                    <nz-badge *ngIf="item.isActive" [nzStatus]="'success'" [nzText]="l('Yes')"></nz-badge>
+                    <nz-badge *ngIf="!item.isActive" [nzStatus]="'default'" [nzText]="l('No')"></nz-badge>
+                </td> -->
+                <!-- <td>
+                    <a (click)="edit(item)">编辑</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="delete(item)">删除</a>
+                </td> -->
+            </tr>
+        </tbody>
+    </nz-table>
+
+</nz-card>

@@ -1,0 +1,1 @@
+{"EntityKeyName":"int","BaseClassName":"YoyoCmsTemplateAppServiceBase","BaseClassDtoName":"YoyoCmsTemplateAppServiceBaseDto","BaseClassNameList":"IAuditLogAppService","Name":"AuditLogAppService","LowerName":"auditLogAppService","SplitName":"audit-log-app-service","NameSplit":["audit","log","app","service"],"Namespace":"YY.Frame.AbpCore.Auditing","Properties":[]}

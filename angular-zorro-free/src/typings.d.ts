@@ -31,4 +31,11 @@ interface JQuery {
   sparkline(...any): any;
 }
 
-interface JQueryStatic {}
+
+interface JQuery {
+  daterangepicker(...any): any;
+}
+interface JQuery {
+  datetimepicker(...any): any;
+}
+interface JQueryStatic { }

@@ -14,14 +14,19 @@ namespace YY.Frame.AbpCore
         {
             Configuration.Authorization.Providers.Add<YoyoCmsTemplateAuthorizationProvider>();
 
-            // 自定义类型映射
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(configuration =>
-            {
-                // XXXMapper.CreateMappers(configuration);
+			//// 自定义类型映射
+			//Configuration.Modules.AbpAutoMapper().Configurators.Add(configuration =>
+			//{
+			//    // XXXMapper.CreateMappers(configuration);
 
 
-            });
-        }
+			//});
+
+
+			//Adding custom AutoMapper configuration
+			Configuration.Modules.AbpAutoMapper().Configurators.Add(CustomDtoMapper.CreateMappings);
+			
+		}
 
         public override void Initialize()
         {

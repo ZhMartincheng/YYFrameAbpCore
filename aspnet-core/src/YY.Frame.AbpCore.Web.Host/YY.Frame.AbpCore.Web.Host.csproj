@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>YY.Frame.AbpCore.Web.Host</PackageId>
     <UserSecretsId>LTMCompanyNameFree-YoyoCmsTemplate-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="App_Data\Logs\**" />

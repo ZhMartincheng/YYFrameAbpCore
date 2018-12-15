@@ -11,6 +11,9 @@
     <RootNamespace>YY.Frame.AbpCore</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\YY.Frame.AbpCore.Core\YY.Frame.AbpCore.Core.csproj" />
   </ItemGroup>
 </Project>

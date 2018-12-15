@@ -7,7 +7,7 @@ import { AboutComponent } from '@app/about/about.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { RolesComponent } from '@app/roles/roles.component';
 import { UsersComponent } from '@app/users/users.component';
-import { BookComponent } from './book/book.component';
+import { AuditlogComponent } from './auditlog/auditlogs.component';
 const routes: Routes = [
   {
     path: 'app',
@@ -36,15 +36,16 @@ const routes: Routes = [
         canActivate: [AppRouteGuard],
       },
       {
+        path: 'audit',
+        component: AuditlogComponent,
+        canActivate: [AppRouteGuard],
+      },
+      {
         path: 'about',
         component: AboutComponent,
         canActivate: [AppRouteGuard],
       },
-      {
-        path: 'book',
-        component: BookComponent,
-        canActivate: [AppRouteGuard],
-      },
+
       {
         path: '**',
         redirectTo: 'home',

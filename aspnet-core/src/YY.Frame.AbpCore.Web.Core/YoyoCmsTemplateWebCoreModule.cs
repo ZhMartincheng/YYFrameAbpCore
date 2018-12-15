@@ -13,6 +13,8 @@ using YY.Frame.AbpCore.Authentication.JwtBearer;
 using YY.Frame.AbpCore.Configuration;
 using YY.Frame.AbpCore.EntityFrameworkCore;
 using Abp.Configuration.Startup;
+using System.IO;
+using Abp.IO;
 
 namespace YY.Frame.AbpCore
 {
@@ -69,5 +71,26 @@ namespace YY.Frame.AbpCore
         {
             IocManager.RegisterAssemblyByConvention(typeof(YoyoCmsTemplateWebCoreModule).GetAssembly());
         }
-    }
+
+		public override void PostInitialize()
+		{
+			SetAppFolders();
+		}
+		private void SetAppFolders()
+		{
+			var appFolders = IocManager.Resolve<AppFolders>();
+
+			appFolders.SampleProfileImagesFolder = Path.Combine(_env.WebRootPath, $"Common{Path.DirectorySeparatorChar}Images{Path.DirectorySeparatorChar}SampleProfilePics");
+			appFolders.TempFileDownloadFolder = Path.Combine(_env.WebRootPath, $"Temp{Path.DirectorySeparatorChar}Downloads");
+			appFolders.WebLogsFolder = Path.Combine(_env.ContentRootPath, $"App_Data{Path.DirectorySeparatorChar}Logs");
+
+
+
+			try
+			{
+				DirectoryHelper.CreateIfNotExists(appFolders.TempFileDownloadFolder);
+			}
+			catch { }
+		}
+}
 }

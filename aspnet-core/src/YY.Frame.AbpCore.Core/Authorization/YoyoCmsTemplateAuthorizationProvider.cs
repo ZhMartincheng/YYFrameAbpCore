@@ -22,15 +22,18 @@ namespace YY.Frame.AbpCore.Authorization
 
 			var users = administration.CreateChildPermission(PermissionNames.Pages_Users, L("Users"));
 
+			var auditLog = administration.CreateChildPermission(PermissionNames.Pages_AuditLog, L("AuditLog"));
+			
+
 			var tenants = administration.CreateChildPermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
 
-			var book = pages.CreateChildPermission(BookPermissions.Node, L("Book"));
-			book.CreateChildPermission(BookPermissions.Query, L("QueryBook"));
-			book.CreateChildPermission(BookPermissions.Create, L("CreateBook"));
-			book.CreateChildPermission(BookPermissions.Edit, L("EditBook"));
-			book.CreateChildPermission(BookPermissions.Delete, L("DeleteBook"));
-			book.CreateChildPermission(BookPermissions.BatchDelete, L("BatchDeleteBook"));
-			book.CreateChildPermission(BookPermissions.ExportExcel, L("ExportExcelBook"));
+			//var book = pages.CreateChildPermission(BookPermissions.Node, L("Book"));
+			//book.CreateChildPermission(BookPermissions.Query, L("QueryBook"));
+			//book.CreateChildPermission(BookPermissions.Create, L("CreateBook"));
+			//book.CreateChildPermission(BookPermissions.Edit, L("EditBook"));
+			//book.CreateChildPermission(BookPermissions.Delete, L("DeleteBook"));
+			//book.CreateChildPermission(BookPermissions.BatchDelete, L("BatchDeleteBook"));
+			//book.CreateChildPermission(BookPermissions.ExportExcel, L("ExportExcelBook"));
 		}
 
         private static ILocalizableString L(string name)

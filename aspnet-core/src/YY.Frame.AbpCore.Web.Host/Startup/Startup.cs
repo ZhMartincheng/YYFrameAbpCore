@@ -128,5 +128,7 @@ namespace YY.Frame.AbpCore.Web.Host.Startup
                     .GetManifestResourceStream("YY.Frame.AbpCore.Web.Host.wwwroot.swagger.ui.index.html");
             }); // URL: /swagger
         }
+
+
     }
 }

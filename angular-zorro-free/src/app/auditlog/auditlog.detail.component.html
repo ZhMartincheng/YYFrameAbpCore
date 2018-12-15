@@ -1,0 +1,159 @@
+<div class="padding-bottom-45">
+    <form nz-form>
+
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span *ngIf="auditLog.userId">{{l("AuditLogDetail")}}</span>
+            </h4>
+            <!-- <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                <span aria-hidden="true">&times;</span>
+            </button> -->
+        </div>
+
+        <h3 class="form-section">{{l("UserInformations")}}</h3>
+
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="12" class="mb-md">
+                <nz-form-label [nzSpan]="7"> {{l("UserName")}}</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback>
+                    {{auditLog.userName}}
+                </nz-form-control>
+            </div>
+            <div nz-col [nzSpan]="12" class="mb-md">
+                <nz-form-label [nzSpan]="7"> {{l("IpAddress")}}</nz-form-label>
+
+                <nz-form-control [nzSpan]="12" nzHasFeedback>
+                    <span>{{auditLog.clientIpAddress}}</span>
+                </nz-form-control>
+            </div>
+
+
+        </div>
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="12" class="mb-md">
+                <nz-form-label [nzSpan]="7"> {{l("Client")}}</nz-form-label>
+                <ng-container>
+                    {{auditLog.clientName}}
+                </ng-container>
+
+            </div>
+
+
+        </div>
+
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="24" class="mb-md">
+                <nz-form-label> {{l("Browser")}}</nz-form-label>
+                <ng-container>
+                    {{auditLog.browserInfo}}
+                </ng-container>
+            </div>
+        </div>
+
+
+
+        <div class="form-group m-form__group row" *ngIf="auditLog.impersonatorUserId">
+            <label class="col-lg-3 col-form-label">
+            </label>
+            <div class="col-lg-9">
+                <span>{{AuditLogImpersonatedOperationInfo}}</span>
+            </div>
+        </div>
+
+        <h3 class="form-section">{{l("ActionInformations")}}</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("Service")}}:
+                    </label>
+                    <div class="col-lg-9">
+                        <span>{{auditLog.serviceName}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("Action")}}:
+                    </label>
+                    <div class="col-lg-9">
+                        <span>{{auditLog.methodName}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("Time")}}:
+                    </label>
+                    <div class="col-lg-9">
+                        <span>{{getExecutionTime()}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("Duration")}}:
+                    </label>
+                    <div class="col-lg-9">
+                        <span>{{getDurationAsMs()}}</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("Parameters")}}:
+                    </label>
+                    <div class="col-lg-9 alert m-alert m-alert--default">
+                        <pre lang="js">{{getFormattedParameters()}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="form-section">{{l("CustomData")}}</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-3 col-form-label">
+                        {{l("None")}}:
+                    </label>
+                    <div *ngIf="auditLog.customData" class="col-lg-9 alert m-alert m-alert--default">
+                        <pre>{{auditLog.customData}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="form-section">{{l("ErrorState")}}</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group m-form__group row">
+                    <label *ngIf="!auditLog.exception" class="col-lg-12 col-form-label">
+                        <i class="fa fa-check-circle m--font-success"></i> {{l("Success")}}
+                    </label>
+                    <div *ngIf="auditLog.exception" class="col-lg-12 alert m-alert m-alert--default">
+                        <pre>{{auditLog.exception}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="close()">{{l("Close")}}</button>
+                </div> -->
+
+
+        <!-- 功能按钮 -->
+        <div class="custom-modal-footer">
+            <div class="custom-modal-footter-group">
+                <button nz-button type="button" (click)="close()">
+                    {{l("Close")}}
+                </button>
+
+            </div>
+        </div>
+
+    </form>
+</div>

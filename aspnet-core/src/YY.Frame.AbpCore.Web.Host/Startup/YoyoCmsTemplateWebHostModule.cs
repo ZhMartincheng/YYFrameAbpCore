@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using YY.Frame.AbpCore.Configuration;
+using Abp.Dependency;
 
 namespace YY.Frame.AbpCore.Web.Host.Startup
 {
@@ -23,5 +24,11 @@ namespace YY.Frame.AbpCore.Web.Host.Startup
         {
             IocManager.RegisterAssemblyByConvention(typeof(YoyoCmsTemplateWebHostModule).GetAssembly());
         }
-    }
+
+		public override void PostInitialize()
+		{
+			
+		}
+
+	}
 }

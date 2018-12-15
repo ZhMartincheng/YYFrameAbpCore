@@ -3,6 +3,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from '@shared/session/app-session.service';
 import { NotifyService, SettingService, MessageService, LocalizationService, AbpMultiTenancyService, FeatureCheckerService, PermissionCheckerService } from '@yoyo/abp';
 import { ModalHelper } from '@yoyo/theme';
+import { Data } from '@angular/router';
 
 export abstract class AppComponentBase {
   localizationSourceName = AppConsts.localization.defaultLocalizationSourceName;
@@ -56,5 +57,21 @@ export abstract class AppComponentBase {
 
   isGranted(permissionName: string): boolean {
     return this.permission.isGranted(permissionName);
+  }
+
+  dateFormat(date: any): Data {
+    if (date === null) {
+      return null;
+    }
+    let d = new Date(date);
+    let y = d.getFullYear().toString();
+    let m = (d.getMonth() + 1).toString();
+    let day = d.getDate().toString();
+    // return y + '-' + m + '-' + day;
+    //return d;
+    let data = y + '-' + m + '-' + day;
+    return new Date(data.replace(/-/g, "/"));
+    // let dateStr:string = this.datePipe.transform(d,'yyyy-MM-dd');
+    // return dateStr;
   }
 }

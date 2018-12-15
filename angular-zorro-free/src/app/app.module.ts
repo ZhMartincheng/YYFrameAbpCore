@@ -22,9 +22,12 @@ import { CreateUserComponent } from '@app/users/create-user/create-user.componen
 import { EditUserComponent } from '@app/users/edit-user/edit-user.component';
 import { MenuService } from '@yoyo/theme';
 import { AdvertisingComponent } from './advertising/advertising.component';
-import { BookComponent } from './book/book.component';
 import { PermissionComponent } from './roles/permission/permission.component';
-import { CreateOrEditBookComponent } from './book/create-or-edit-book/create-or-edit-book.component';
+import { AuditlogComponent } from './auditlog/auditlogs.component';
+import { MomentFormatPipe } from '@shared/utils/moment-format.pipe';
+import { UtilsModule } from '@shared/utils/utils.module';
+import { AppCommonModule } from '@appshared/common/app-common.module';
+import { AuditLogDetailModalComponent } from './auditlog/auditlog.detail.component';
 
 @NgModule({
   imports: [
@@ -38,6 +41,8 @@ import { CreateOrEditBookComponent } from './book/create-or-edit-book/create-or-
     LayoutModule,
     SharedModule,
     AbpModule,
+    UtilsModule,
+    AppCommonModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -53,9 +58,9 @@ import { CreateOrEditBookComponent } from './book/create-or-edit-book/create-or-
     CreateUserComponent,
     EditUserComponent,
     AdvertisingComponent,
-    BookComponent,
-    CreateOrEditBookComponent,
     PermissionComponent,
+    AuditlogComponent,
+    AuditLogDetailModalComponent,
   ],
   entryComponents: [
     CreateTenantComponent,
@@ -66,7 +71,7 @@ import { CreateOrEditBookComponent } from './book/create-or-edit-book/create-or-
     EditUserComponent,
     AdvertisingComponent,
     PermissionComponent,
-    CreateOrEditBookComponent,
+    AuditLogDetailModalComponent
   ],
   providers: [LocalizationService, MenuService],
 })
