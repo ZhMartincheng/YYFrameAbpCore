@@ -7,10 +7,15 @@ import { HeaderFullScreenComponent } from './default/header/components/fullscree
 import { HeaderI18nComponent } from './default/header/components/i18n.component';
 import { HeaderStorageComponent } from './default/header/components/storage.component';
 import { HeaderUserComponent } from './default/header/components/user.component';
+import { ChangePasswordComponent } from './default/header/change-password/change-password.component';
+import { CommonModule } from '@angular/common';
+import { AppComponent } from '@app/app.component';
+import { LocalizationService } from 'yoyo-ng-module/src/abp';
 
 const COMPONENTS = [
   HeaderComponent,
   SidebarComponent,
+  ChangePasswordComponent,
 ];
 
 const HEADERCOMPONENTS = [
@@ -19,6 +24,11 @@ const HEADERCOMPONENTS = [
   HeaderStorageComponent,
   HeaderUserComponent,
 ];
+const Entry = [
+  AppComponent,
+  ChangePasswordComponent,
+
+]
 
 // passport
 
@@ -26,6 +36,8 @@ const HEADERCOMPONENTS = [
 @NgModule({
   imports: [SharedModule],
   declarations: [...COMPONENTS, ...HEADERCOMPONENTS,],
+  entryComponents: [...Entry],
   exports: [...COMPONENTS],
+  providers: [LocalizationService],
 })
 export class LayoutModule { }

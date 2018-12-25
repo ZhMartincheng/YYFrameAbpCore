@@ -1,6 +1,7 @@
 using Abp.Authorization;
 using Abp.Localization;
 using Abp.MultiTenancy;
+using YY.Frame.AbpCore.Parameters.Authorization;
 using YY.Frame.AbpCore.Persons.Authorization;
 using YY.Frame.Authorization;
 
@@ -27,16 +28,18 @@ namespace YY.Frame.AbpCore.Authorization
 
 			var tenants = administration.CreateChildPermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
 
-			//var book = pages.CreateChildPermission(BookPermissions.Node, L("Book"));
-			//book.CreateChildPermission(BookPermissions.Query, L("QueryBook"));
-			//book.CreateChildPermission(BookPermissions.Create, L("CreateBook"));
-			//book.CreateChildPermission(BookPermissions.Edit, L("EditBook"));
-			//book.CreateChildPermission(BookPermissions.Delete, L("DeleteBook"));
-			//book.CreateChildPermission(BookPermissions.BatchDelete, L("BatchDeleteBook"));
-			//book.CreateChildPermission(BookPermissions.ExportExcel, L("ExportExcelBook"));
+	        var parameter = administration.CreateChildPermission(ParameterPermissions.Node, L("Parameter"));
+	        parameter.CreateChildPermission(ParameterPermissions.Query, L("QueryParameter"));
+	        parameter.CreateChildPermission(ParameterPermissions.Create, L("CreateParameter"));
+	        parameter.CreateChildPermission(ParameterPermissions.Edit, L("EditParameter"));
+	        parameter.CreateChildPermission(ParameterPermissions.Delete, L("DeleteParameter"));
+	       // parameter.CreateChildPermission(ParameterPermissions.BatchDelete, L("BatchDeleteParameter"));
+	       // parameter.CreateChildPermission(ParameterPermissions.ExportExcel, L("ExportExcelParameter"));
+
+
 		}
 
-        private static ILocalizableString L(string name)
+		private static ILocalizableString L(string name)
         {
             return new LocalizableString(name, YoyoCmsTemplateConsts.LocalizationSourceName);
         }

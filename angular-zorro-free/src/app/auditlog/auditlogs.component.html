@@ -107,35 +107,44 @@
     </div>
 
 
+    <!-- <th nzShowSort nzSortKey="name" nzShowFilter [nzFilters]="nameList" 
+    (nzFilterChange)="filter($event,searchAddress)">Name</th>
+    <th nzShowSort nzSortKey="age">Age</th>
+    <th nzShowSort nzSortKey="address" nzShowFilter [nzFilterMultiple]="false" 
+    [nzFilters]="addressList"
+     (nzFilterChange)="filter(listOfSearchName,$event)">Address</th> -->
+
+
+
     <nz-table #ajaxTable nzShowSizeChanger [nzData]="dataList" [nzTotal]="totalItems" [(nzPageIndex)]="pageNumber"
         [(nzPageSize)]="pageSize" [nzLoading]="isTableLoading" (nzPageIndexChange)="refresh()" (nzPageSizeChange)="refresh()"
         [nzFrontPagination]="false">
-        <thead>
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
             <tr>
                 <th></th>
                 <th></th>
-                <th>
+                <th nzShowSort nzSortKey="executionTime">
                     {{l('Time')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="userName">
                     {{l('UserName')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="serviceName">
                     {{l('Service')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="methodName">
                     {{l('Action')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="executionDuration">
                     {{l('Duration')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="clientIpAddress">
                     {{l('IpAddress')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="clientName">
                     {{l('Client')}}
                 </th>
-                <th>
+                <th nzShowSort nzSortKey="browserInfo">
                     {{l('Browser')}}
                 </th>
             </tr>

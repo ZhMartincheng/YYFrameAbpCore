@@ -97,6 +97,8 @@
     <text name="EditingUser" value="修改用户" />
     <text name="CreatingNewUser" value="添加用户" />
     <text name="Edit" value="修改" />
+
+    <text name="BatchDelete"  value="批量删除"></text>
    
     <text name="EditingRole" value="修改角色" />
     <text name="CreatingNewRole" value="添加角色" />
@@ -237,5 +239,17 @@
     <text name="CustomRange" value="自定义范围" />
     
      <text name="AuditLog" value="日志审计" />
+     <text name="FullScreen" value="全屏" />
+     <text name="ClearAllLocalStorage" value="清除全部缓存" />
+
+    <text name="Parameter"  value="系统参数"></text>
+    <text name="ParameterCode"  value="参数代码"></text>
+    <text name="ParameterValue"  value="参数值"></text>
+    <text name="ParameterDesc"  value="参数描述"></text>
+    <text name="CreateParameter"  value="新增系统参数"></text>
+    <text name="QueryParameter"  value="查询系统参数"></text>
+    <text name="EditParameter"  value="编辑系统参数"></text>
+    <text name="DeleteParameter"  value="删除系统参数"></text>
+
   </texts>
 </localizationDictionary>

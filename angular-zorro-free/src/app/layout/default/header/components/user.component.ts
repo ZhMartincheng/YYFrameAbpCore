@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { SettingsService } from '@yoyo/theme';
 import { AppComponentBase } from '@shared/component-base';
 import { AppAuthService } from '@shared/auth/app-auth.service';
-// import { DA_SERVICE_TOKEN, ITokenService } from '@yoyo/auth';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { CreateRoleComponent } from '@app/roles/create-role/create-role.component';
 
 @Component({
   selector: 'header-user',
@@ -14,13 +15,10 @@ import { AppAuthService } from '@shared/auth/app-auth.service';
       
     </div>
     <div nz-menu class="width-sm">
-      <div nz-menu-item [nzDisabled]="true">
-        <i nz-icon type="user" class="mr-sm"></i>
-        {{l("UserCenter")}}
-      </div>
-      <div nz-menu-item [nzDisabled]="true">
-        <i nz-icon type="setting" class="mr-sm"></i>
-        {{l("Setting")}}
+
+      <div nz-menu-item  (click)="changePassword()">
+        <i nz-icon type="edit" class="mr-sm"></i>
+        {{l("ChangePassword")}}
       </div>
       <li nz-menu-divider></li>
       <div nz-menu-item (click)="logout()">
@@ -42,6 +40,17 @@ export class HeaderUserComponent extends AppComponentBase {
 
   logout(): void {
     this._authService.logout();
+  }
+  changePassword(): void {
+    //
+    this.modalHelper
+      .open(ChangePasswordComponent, {}, 'md', {
+        nzMask: true,
+        nzClosable: false,
+      })
+      .subscribe(isSave => {
+
+      });
   }
 }
 

@@ -1058,6 +1058,37 @@ namespace YY.Frame.AbpCore.Migrations
                     b.ToTable("AbpTenants");
                 });
 
+            modelBuilder.Entity("YY.Frame.AbpCore.Parameters.Parameter", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<string>("ParameterCode");
+
+                    b.Property<string>("ParameterDesc");
+
+                    b.Property<string>("ParameterValue");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Parameters");
+                });
+
             modelBuilder.Entity("YY.Frame.AbpCore.Persons.Book", b =>
                 {
                     b.Property<long>("Id")

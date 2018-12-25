@@ -2,6 +2,7 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using YY.Frame.AbpCore.Authorization;
+using YY.Frame.AbpCore.Parameters.Mapper;
 
 namespace YY.Frame.AbpCore
 {
@@ -25,7 +26,8 @@ namespace YY.Frame.AbpCore
 
 			//Adding custom AutoMapper configuration
 			Configuration.Modules.AbpAutoMapper().Configurators.Add(CustomDtoMapper.CreateMappings);
-			
+	        Configuration.Modules.AbpAutoMapper().Configurators.Add(ParameterMapper.CreateMappings);
+
 		}
 
         public override void Initialize()

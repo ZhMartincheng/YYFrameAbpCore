@@ -16,18 +16,21 @@ using YY.Frame.AbpCore.Authorization.Roles;
 using YY.Frame.AbpCore.Authorization.Users;
 using YY.Frame.AbpCore.Roles.Dto;
 using YY.Frame.AbpCore.Users.Dto;
+using System;
 
 namespace YY.Frame.AbpCore.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+   public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserAppService(
+		public UserManager UserManager { get; set; }
+
+		public UserAppService(
             IRepository<User, long> repository,
             UserManager userManager,
             RoleManager roleManager,
@@ -149,5 +152,37 @@ namespace YY.Frame.AbpCore.Users
         {
             identityResult.CheckErrors(LocalizationManager);
         }
-    }
+
+		public async Task ChangePassword(ChangePasswordInput input)
+		{
+			await UserManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+			var user = await GetCurrentUserAsync();
+			CheckErrors(await UserManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword));
+		}
+
+		/// <summary>
+		/// 检查输入的原密码与数据库中密码是否相等
+		/// </summary>
+		/// <returns></returns>
+		public async Task<bool> CheckOldPassword(string oldPassword)
+		{
+			var userId = AbpSession.GetUserId();
+			var entity = await _userManager.GetUserByIdAsync(userId);
+			var compareResult = _passwordHasher.VerifyHashedPassword(entity, entity.Password, oldPassword);
+			var result = compareResult == PasswordVerificationResult.Success ? true : false;
+			return result;
+		}
+
+		protected virtual async Task<User> GetCurrentUserAsync()
+		{
+			var user = await UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
+			if (user == null)
+			{
+				throw new Exception("There is no current user!");
+			}
+
+			return user;
+		}
+	}
 }

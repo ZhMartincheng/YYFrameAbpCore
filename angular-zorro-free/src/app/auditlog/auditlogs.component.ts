@@ -43,6 +43,8 @@ export class AuditlogComponent extends PagedListingComponentBase<AuditLogListDto
     shedateFormat = 'yyyy-MM-dd';
     public searchAreasDate = [];
 
+    public sortName = null;
+    public sortValue = null;
 
     protected fetchDataList(
         request: PagedRequestDto,
@@ -60,7 +62,7 @@ export class AuditlogComponent extends PagedListingComponentBase<AuditLogListDto
                 this.hasException,
                 this.minExecutionDuration,
                 this.maxExecutionDuration,
-                '',
+                request.sorting,
                 request.maxResultCount,
                 request.skipCount
 
@@ -74,6 +76,20 @@ export class AuditlogComponent extends PagedListingComponentBase<AuditLogListDto
                 this.totalItems = result.totalCount;
             });
     }
+
+    sort(sort: { key: string, value: string }): void {
+        this.sortName = sort.key;
+        //  time,,descend
+        //  time,,ascend
+        if (sort.value.indexOf("desc") >= 0)
+            this.sortValue = "desc";
+        else
+            this.sortValue = "asc";
+        this.sorting = this.sortName + "  " + this.sortValue;
+        this.refresh();
+    }
+
+
 
     truncateStringWithPostfix(text: string, length: number): string {
         return abp.utils.truncateStringWithPostfix(text, length);

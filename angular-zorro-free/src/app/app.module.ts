@@ -28,6 +28,8 @@ import { MomentFormatPipe } from '@shared/utils/moment-format.pipe';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { AppCommonModule } from '@appshared/common/app-common.module';
 import { AuditLogDetailModalComponent } from './auditlog/auditlog.detail.component';
+import { ParameterComponent } from './parameters/parameter.component';
+import { CreateOrEditParameterComponent } from './parameters/create-or-edit-parameter/create-or-edit-parameter.component';
 
 @NgModule({
   imports: [
@@ -61,6 +63,8 @@ import { AuditLogDetailModalComponent } from './auditlog/auditlog.detail.compone
     PermissionComponent,
     AuditlogComponent,
     AuditLogDetailModalComponent,
+    ParameterComponent,
+    CreateOrEditParameterComponent,
   ],
   entryComponents: [
     CreateTenantComponent,
@@ -71,7 +75,8 @@ import { AuditLogDetailModalComponent } from './auditlog/auditlog.detail.compone
     EditUserComponent,
     AdvertisingComponent,
     PermissionComponent,
-    AuditLogDetailModalComponent
+    AuditLogDetailModalComponent,
+    CreateOrEditParameterComponent,
   ],
   providers: [LocalizationService, MenuService],
 })

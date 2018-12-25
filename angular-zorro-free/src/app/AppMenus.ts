@@ -47,8 +47,15 @@ export class AppMenus {
             text: "",
             i18n: "AuditLog",
             acl: "Pages.AuditLogs",
-            icon: { type: "icon", value: "user" },
+            icon: { type: "icon", value: "audit" },
             link: "/app/audit",
+        },
+        {
+            text: "",
+            i18n: "Parameter",
+            acl: "Pages.Parameter.Query",
+            icon: { type: "icon", value: "setting" },
+            link: "/app/parameter",
         },
         {
             text: "",

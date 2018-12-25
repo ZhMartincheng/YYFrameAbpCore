@@ -14,7 +14,6 @@ import { TenantChangeComponent } from './tenant/tenant-change.component';
 import { TenantChangeModalComponent } from './tenant/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -22,6 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AbpModule } from '@yoyo/abp';
 import { TenantRegisterComponent } from './tenant-register/tenant-register.component';
+import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 @NgModule({
   imports: [
@@ -43,7 +43,6 @@ import { TenantRegisterComponent } from './tenant-register/tenant-register.compo
     LoginComponent,
     RegisterComponent,
     AccountLanguagesComponent,
-
     TenantRegisterComponent,
   ],
   entryComponents: [TenantChangeModalComponent],

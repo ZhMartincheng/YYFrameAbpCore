@@ -11,5 +11,7 @@ namespace YY.Frame.AbpCore.Users
         Task<ListResultDto<RoleDto>> GetRoles();
 
         Task ChangeLanguage(ChangeUserLanguageDto input);
-    }
+		Task ChangePassword(ChangePasswordInput input);
+		Task<bool> CheckOldPassword(string oldPassword);
+	}
 }
